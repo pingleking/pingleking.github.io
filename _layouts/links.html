@@ -1,0 +1,29 @@
+---
+layout: default
+# The layout for links page
+script_includes:
+  - comment
+---
+
+{% include lang.html %}
+
+<article class="px-1">
+  {% if page.layout == 'links' or page.collection == 'tabs' %}
+    {% assign tab_key = page.title | downcase %}
+    {% assign title = site.data.locales[lang].tabs[tab_key] | default: page.title %}
+    <h1 class="dynamic-title">
+      {{ title }}
+    </h1>
+    <div class="content">
+      {{ content }}
+    </div>
+  {% else %}
+    {{ content }}
+  {% endif %}
+
+  {% if page.comments and site.comments.provider %}
+    <div class="comments-wrapper mt-4">
+      {% include comment.html %}
+    </div>
+  {% endif %}
+</article>
